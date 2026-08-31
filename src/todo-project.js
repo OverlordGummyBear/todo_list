@@ -17,11 +17,20 @@ class TodoProject{
     }
 
     updateTodoItem(todoItemId, title, description, dueDate, priority){
+        const todoItem = this.todoItemList.find((item) => item.id === todoItemId);
 
+        if(todoItem === undefined) return;
+
+        todoItem.title = title !== null ? title : todoItem.title;
+        todoItem.description = description !== null ? description : todoItem.description;
+        todoItem.dueDate = dueDate !== null ? dueDate : todoItem.dueDate;
+        todoItem.priority = priority !== null ? priority : todoItem.priority;
     }
 
     deleteTodoItem(todoItemId){
-        const deleteIndex = this.todoItemList.findIndex((item) => item.id == todoItemId);
+        const deleteIndex = this.todoItemList.findIndex((item) => item.id === todoItemId);
+
+        if(deleteIndex === -1) return;
 
         this.todoItemList.splice(deleteIndex, 1);
     }
