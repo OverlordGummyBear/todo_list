@@ -16,12 +16,14 @@ class TodoProject{
         this.todoItemList.push(new TodoItem(title, description, dueDate, priority));
     }
 
-    updateTodoItem(){
+    updateTodoItem(todoItemId, title, description, dueDate, priority){
 
     }
 
-    deleteTodoItem(){
+    deleteTodoItem(todoItemId){
+        const deleteIndex = this.todoItemList.findIndex((item) => item.id == todoItemId);
 
+        this.todoItemList.splice(deleteIndex, 1);
     }
 }
 
