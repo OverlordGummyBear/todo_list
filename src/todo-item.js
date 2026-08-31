@@ -1,4 +1,4 @@
-class TodoItem{
+class TodoItem{    
     constructor(title, description, dueDate, priority){
         this.id = crypto.randomUUID();
         this.completed = false;
@@ -8,17 +8,17 @@ class TodoItem{
         this.priority = priority;
     }
 
-    get completed(){ return this.completed; }
-    get title(){ return this.title; }
-    get description(){ return this.description; }
-    get dueDate(){ return this.dueDate; }
-    get priority(){ return this.priority; }
+    get completed(){ return this._completed; }
+    get title(){ return this._title; }
+    get description(){ return this._description; }
+    get dueDate(){ return this._dueDate; }
+    get priority(){ return this._priority; }
 
-    set completed(isCompleted){ this.completed = isCompleted; }
-    set title(newTitle){ this.title = newTitle; }
-    set description(newDescription){this.description = newDescription; }
-    set dueDate(newDueDate){ this.dueDate = newDueDate; }
-    set priority(newPriority){ this.priority = newPriority; }
+    set completed(isCompleted){ this._isCompleted = isCompleted; }
+    set title(newTitle){ this._title = newTitle; }
+    set description(newDescription){this._description = newDescription; }
+    set dueDate(newDueDate){ this._dueDate = newDueDate; }
+    set priority(newPriority){ this._priority = newPriority; }
 }
 
 export default TodoItem;
