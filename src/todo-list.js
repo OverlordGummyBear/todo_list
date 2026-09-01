@@ -27,10 +27,12 @@ class TodoList{
         this._activeProject = project;
     }
 
+    //pass project object instead of name
     addTodoProject(name){
         this.todoProjectList.push(new TodoProject(name));
     }
 
+    //move to project
     renameTodoProject(todoProjId, newName){
         const project = this.todoProjectList.find((project) => project.id === todoProjId);
 
@@ -39,6 +41,7 @@ class TodoList{
         project.name = newName;
     }
 
+    //move to project
     deleteTodoProject(todoProjId){
         const projectIndex = this._todoProjectList.findIndex((project) => project.id === todoProjId);
 
@@ -51,6 +54,7 @@ class TodoList{
         this._todoProjectList.splice(projectIndex, 1);
     }
 
+    //should not be here / remove
     addTodoItemToProject(projectId, title, description, dueDate, priority){
         const todoProject = this._todoProjectList.find((project) => project.id === projectId);
 

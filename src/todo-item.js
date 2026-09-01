@@ -1,6 +1,8 @@
 let id = 0;
 
-class TodoItem{    
+class TodoItem{
+    _projectId;
+
     constructor(title, description, dueDate, priority){
         this.id = id++;//crypto.randomUUID(); //
         this.completed = false;
@@ -15,12 +17,22 @@ class TodoItem{
     get description(){ return this._description; }
     get dueDate(){ return this._dueDate; }
     get priority(){ return this._priority; }
+    get projectId(){ return this._projectId; }
 
     set completed(isCompleted){ this._isCompleted = isCompleted; }
     set title(newTitle){ this._title = newTitle; }
     set description(newDescription){this._description = newDescription; }
     set dueDate(newDueDate){ this._dueDate = newDueDate; }
     set priority(newPriority){ this._priority = newPriority; }
+    set projectId(newProjectId){this._projectId = newProjectId; }
+
+    delete(){
+        //call project remove item method
+    }
+
+    updateMethod(){
+
+    }
 }
 
 export default TodoItem;

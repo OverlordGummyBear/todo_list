@@ -18,10 +18,15 @@ class TodoProject{
         return this.todoItemList.find((item) => item.id === id);
     }
 
-    addTodoItem(title, description, dueDate, priority){
-        this.todoItemList.push(new TodoItem(title, description, dueDate, priority));
+    addTodoItem(todoItem){
+        if(this.todoItemList.find((item) => item.id === todoItem.id)) return false;
+
+        this.todoItemList.push(todoItem);
+
+        return true;
     }
 
+    //move to item class
     updateTodoItem(todoItemId, title, description, dueDate, priority){
         const todoItem = this.todoItemList.find((item) => item.id === todoItemId);
 
@@ -33,6 +38,7 @@ class TodoProject{
         todoItem.priority = priority !== null ? priority : todoItem.priority;
     }
 
+    //rename to remove item
     deleteTodoItem(todoItemId){
         const deleteIndex = this.todoItemList.findIndex((item) => item.id === todoItemId);
 
