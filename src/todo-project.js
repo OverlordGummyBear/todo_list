@@ -1,5 +1,6 @@
 import TodoItem from "./todo-item.js";
 
+//let id = 0;
 //Want to make it so if an item is not assigned to a project, 
 // that it goes directly to the default TodoProject
 
@@ -7,13 +8,17 @@ class TodoProject{
     todoItemList = [];
     
     constructor(name){
-        this.id = crypto.randomUUID();
+        this.id = crypto.randomUUID(); //id++;
         this.name = name;
     }
 
     get todoItemList(){ return this.todoItemList; }
     get name(){ return this._name; }
     set name(newName){ this._name = newName; }
+
+    getTodoItem(id){
+        return this.todoItemList.find((item) => item.id === id);
+    }
 
     addTodoItem(title, description, dueDate, priority){
         this.todoItemList.push(new TodoItem(title, description, dueDate, priority));
