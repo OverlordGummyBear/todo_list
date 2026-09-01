@@ -1,12 +1,12 @@
 import TodoItem from "./todo-item.js";
 
-//let id = 0;
+let id = 0;
 
 class TodoProject{
     todoItemList = [];
     
     constructor(name){
-        this.id = crypto.randomUUID(); //id++;
+        this.id = id++; //crypto.randomUUID(); //
         this.name = name;
     }
 

@@ -1,32 +1,34 @@
-import TodoProject from "./todo-project";
+import TodoProject from "./todo-project.js";
 
 class TodoList{
-    todoProjectList = [];
+    _todoProjectList = [];
     
     constructor(){
         const defaultTodoProject = new TodoProject("Inbox");
 
-        this.activeProject = defaultTodoProject;
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);
+        this.activeProject = this.defaultId;
     }
 
     get todoProjectList(){ return this._todoProjectList; }
 
-    get todoProject(id){
+    getTodoProject(id){
         return this._todoProjectList.find((project) => project.id === id);
     }
 
-    setActiveProject(id){
-        const project = this.todoProjectList.find((project) => project.id = id);
+    get activeProject(){ return this._activeProject; }
 
-        if(project === undefined) return;
+    set activeProject(id){
+        const project = this._todoProjectList.find((project) => project.id === id);
 
-        this.activeProject = project;
+        if (project === undefined) return;
+        
+        this._activeProject = project;
     }
 
     addTodoProject(name){
-        this._todoProjectList.push(new TodoProject(name));
+        this.todoProjectList.push(new TodoProject(name));
     }
 
     renameTodoProject(todoProjId, newName){
@@ -38,21 +40,22 @@ class TodoList{
     }
 
     deleteTodoProject(todoProjId){
-        const projectIndex = this.todoProjectList.findIndex((project) => project.id === todoProjId);
+        const projectIndex = this._todoProjectList.findIndex((project) => project.id === todoProjId);
 
         if(projectIndex === -1) return;
-        if(this.todoProjectList[projectIndex] == this.activeProject){
-            this.activeProject = this.todoProjectList.find(project => project.id === this._defaultProjectId);
+        if(this.todoProjectList[projectIndex] === this.activeProject){
+            this.activeProject = this.defaultId;
         }
+        if(this.defaultId === todoProjId) return; //not allowing the user to delete the default project
 
-        this.todoProjectList.splice(projectIndex, 1);
+        this._todoProjectList.splice(projectIndex, 1);
     }
 
     addTodoItemToProject(projectId, title, description, dueDate, priority){
         const todoProject = this._todoProjectList.find((project) => project.id === projectId);
 
-        if(todoProject === undefined){
-            defaultTodoProject.addTodoItem(title, description, dueDate, priority);
+        if(todoProject === undefined){ 
+            this.getTodoProject(this.defaultId).addTodoItem(title, description, dueDate, priority);
             return;
         }
 

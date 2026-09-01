@@ -9,6 +9,7 @@ defaultTodo.addTodoItem("Number 1", "you can think of", null , "high");
 //console.log("Log todo item from id")
 //console.log(defaultTodo.getTodoItem(1));
 
+/* 
 console.log("Log todoProject")
 console.log(defaultTodo.todoItemList);
 
@@ -18,4 +19,13 @@ console.log(defaultTodo.getTodoItem(1));
 console.log("Delete item with id 1");
 defaultTodo.deleteTodoItem(1);
 console.log(defaultTodo.todoItemList);
+*/
+
+const list = new TodoList();
+list.addTodoProject("First project");
+console.log(list.todoProjectList)
+
+list.addTodoItemToProject(4, "Normal", "godt", "date", "high");
+
+
 
