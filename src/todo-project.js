@@ -11,7 +11,6 @@ class TodoProject{
         this.name = name;
     }
 
-    get id(){ return this._id; }
     get todoItemList(){ return this.todoItemList; }
     get name(){ return this._name; }
     set name(newName){ this._name = newName; }
