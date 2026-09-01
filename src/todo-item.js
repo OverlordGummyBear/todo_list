@@ -1,8 +1,8 @@
-//let id = 0;
+let id = 0;
 
 class TodoItem{    
     constructor(title, description, dueDate, priority){
-        this.id = crypto.randomUUID(); //id++;//
+        this.id = id++;//crypto.randomUUID(); //
         this.completed = false;
         this.title = title;
         this.description = description;
