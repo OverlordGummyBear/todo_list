@@ -6,8 +6,9 @@ class TodoList{
     constructor(){
         const defaultTodoProject = new TodoProject("Inbox");
 
-        this.todoProjectList.push(defaultTodoProject);
         this.activeProject = defaultTodoProject;
+        this.defaultId = defaultTodoProject.id;
+        this.todoProjectList.push(defaultTodoProject);
     }
 
     get todoProjectList(){ return this._todoProjectList; }
@@ -16,7 +17,13 @@ class TodoList{
         return this._todoProjectList.find((project) => project.id === id);
     }
 
-    setActiveProject(todoProject){ this._activeProject = todoProject; }
+    setActiveProject(id){
+        const project = this.todoProjectList.find((project) => project.id = id);
+
+        if(project === undefined) return;
+
+        this.activeProject = project;
+    }
 
     addTodoProject(name){
         this._todoProjectList.push(new TodoProject(name));
@@ -34,6 +41,9 @@ class TodoList{
         const projectIndex = this.todoProjectList.findIndex((project) => project.id === todoProjId);
 
         if(projectIndex === -1) return;
+        if(this.todoProjectList[projectIndex] == this.activeProject){
+            this.activeProject = this.todoProjectList.find(project => project.id === this._defaultProjectId);
+        }
 
         this.todoProjectList.splice(projectIndex, 1);
     }
