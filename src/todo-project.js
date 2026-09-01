@@ -7,10 +7,14 @@ class TodoProject{
     todoItemList = [];
     
     constructor(name){
+        this.id = crypto.randomUUID();
         this.name = name;
     }
 
+    get id(){ return this._id; }
     get todoItemList(){ return this.todoItemList; }
+    get name(){ return this._name; }
+    set name(newName){ this._name = newName; }
 
     addTodoItem(title, description, dueDate, priority){
         this.todoItemList.push(new TodoItem(title, description, dueDate, priority));
