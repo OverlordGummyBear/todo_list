@@ -1,8 +1,6 @@
 import TodoItem from "./todo-item.js";
 
 //let id = 0;
-//Want to make it so if an item is not assigned to a project, 
-// that it goes directly to the default TodoProject
 
 class TodoProject{
     todoItemList = [];
@@ -45,5 +43,3 @@ class TodoProject{
 }
 
 export default TodoProject;
-
-

@@ -37,4 +37,17 @@ class TodoList{
 
         this.todoProjectList.splice(projectIndex, 1);
     }
+
+    addTodoItemToProject(projectId, title, description, dueDate, priority){
+        const todoProject = this._todoProjectList.find((project) => project.id === projectId);
+
+        if(todoProject === undefined){
+            defaultTodoProject.addTodoItem(title, description, dueDate, priority);
+            return;
+        }
+
+        todoProject.addTodoItem(title, description, dueDate, priority);
+    }
 }
+
+export default TodoList;
