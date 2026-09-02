@@ -1,3 +1,8 @@
+@font-face {
+    font-family: milky-cream;
+    src: url("./Milky-Cream.otf");
+}
+
 body, html{
     margin: 0px;
     padding: 0px;
@@ -15,15 +20,44 @@ body{
     grid-template-rows: 100px 1fr;
 }
 
+/* header */
 .header{
-    background-color: aqua;
+    background-color: #d0312d;
     grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.sidepanel{
-    background-color: grey;
+h1{
+    font-family: milky-cream, sans-serif;
+    font-size: 50px;
 }
 
+/* side panel */
+.side-panel{
+    background-color: #fcc9c7;
+}
+
+.filter-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 20px 0px;
+}
+
+.filter-container > button{
+    width: 90%;
+    font-size: 18px;
+    text-align: left;
+    background-color: white;
+    border: none;
+}
+
+/* task container */
 .task-container{
-    background-color: blue;
+    
 }

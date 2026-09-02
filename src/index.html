@@ -8,15 +8,31 @@
 <body>
     <div class="layout-container">
         <div class="header">
-
+            <h1>Doer's To Do</h1>
         </div>
 
-        <div class="sidepanel">
+        <div class="side-panel">
+            <div class="filter-container">
+                <button> All </button>
+                <button> Today </button>
+                <button> Week </button>
+                <button> Completed </button>
+            </div>
 
+            <div class="project-container">
+                <h2>Projects</h2>
+                <div class="projects">
+
+                </div>
+                <button command="show-modal" commandfor="project-dialog">New Project + </button>
+            </div>
         </div>
 
         <div class="task-container">
-
+            <dialog id="project-dialog">
+                <p>This is the project dialog</p>
+                <button command="close" commandfor="project-dialog"> Close </button>
+            </dialog>
         </div>
     </div>
 </body>
