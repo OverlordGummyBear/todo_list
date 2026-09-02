@@ -3,48 +3,40 @@ import TodoItem from "./todo-item.js";
 let id = 0;
 
 class TodoProject{
-    todoItemList = [];
+    _todoList;
+    _todoItemList = [];
     
     constructor(name){
         this.id = id++; //crypto.randomUUID(); //
         this.name = name;
     }
 
-    get todoItemList(){ return this.todoItemList; }
+    get todoItemList(){ return this._todoItemList; }
     get name(){ return this._name; }
     set name(newName){ this._name = newName; }
 
     getTodoItem(id){
-        return this.todoItemList.find((item) => item.id === id);
+        return this._todoItemList.find((item) => item.id === id);
     }
 
     addTodoItem(todoItem){
-        if(this.todoItemList.find((item) => item.id === todoItem.id)) return false;
+        //make sure that the same two items cannot be added to a project
+        if(this._todoItemList.find((item) => item.id === todoItem.id)) return false;
 
-        this.todoItemList.push(todoItem);
+        this._todoItemList.push(todoItem);
+        todoItem.project = this;
 
         return true;
     }
 
-    //move to item class
-    updateTodoItem(todoItemId, title, description, dueDate, priority){
-        const todoItem = this.todoItemList.find((item) => item.id === todoItemId);
+    removeTodoItem(todoItemId){
+        const deleteIndex = this._todoItemList.findIndex((item) => item.id === todoItemId);
 
-        if(todoItem === undefined) return;
+        if(deleteIndex === -1) return false;
 
-        todoItem.title = title !== null ? title : todoItem.title;
-        todoItem.description = description !== null ? description : todoItem.description;
-        todoItem.dueDate = dueDate !== null ? dueDate : todoItem.dueDate;
-        todoItem.priority = priority !== null ? priority : todoItem.priority;
-    }
+        this._todoItemList.splice(deleteIndex, 1);
 
-    //rename to remove item
-    deleteTodoItem(todoItemId){
-        const deleteIndex = this.todoItemList.findIndex((item) => item.id === todoItemId);
-
-        if(deleteIndex === -1) return;
-
-        this.todoItemList.splice(deleteIndex, 1);
+        return true;
     }
 }
 

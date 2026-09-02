@@ -27,43 +27,27 @@ class TodoList{
         this._activeProject = project;
     }
 
-    //pass project object instead of name
-    addTodoProject(name){
-        this.todoProjectList.push(new TodoProject(name));
+    addTodoProject(project){
+        //make sure that projects cannot have the same name
+        if(this._todoProjectList.find((proj) => proj.name === project.name)) return false;
+        
+        this.todoProjectList.push(project);
+
+        return true;
     }
 
-    //move to project
-    renameTodoProject(todoProjId, newName){
-        const project = this.todoProjectList.find((project) => project.id === todoProjId);
+    removeTodoProject(todoProjectId){
+        if(this.defaultId === todoProjectId) return false; //not allowing the user to delete the default project
+        
+        const projectIndex = this._todoProjectList.findIndex((project) => project.id === todoProjectId);
 
-        if(project === undefined) return;
-
-        project.name = newName;
-    }
-
-    //move to project
-    deleteTodoProject(todoProjId){
-        const projectIndex = this._todoProjectList.findIndex((project) => project.id === todoProjId);
-
-        if(projectIndex === -1) return;
-        if(this.todoProjectList[projectIndex] === this.activeProject){
+        if(projectIndex === -1) return false;
+        if(this._todoProjectList[projectIndex] === this.activeProject){
             this.activeProject = this.defaultId;
         }
-        if(this.defaultId === todoProjId) return; //not allowing the user to delete the default project
 
         this._todoProjectList.splice(projectIndex, 1);
-    }
-
-    //should not be here / remove
-    addTodoItemToProject(projectId, title, description, dueDate, priority){
-        const todoProject = this._todoProjectList.find((project) => project.id === projectId);
-
-        if(todoProject === undefined){ 
-            this.getTodoProject(this.defaultId).addTodoItem(title, description, dueDate, priority);
-            return;
-        }
-
-        todoProject.addTodoItem(title, description, dueDate, priority);
+        return true;
     }
 }
 

@@ -1,17 +1,21 @@
 import TodoItem from "./todo-item.js";
 import TodoProject from "./todo-project.js";
+import ProjectList from "./todo-list.js";
 
 class CreationController{
-    static createItem(projectId, title, description, dueDate, priority){
-        //create item 
-        //connect item to project using id (push it to project array) //project.addTodoItem(todoItem)
-        //return item
-        //item x = new item;
-        //if(project.addtodoitem(item)) item.setProjectId(projectId)
+    static createItem(project, title, description, dueDate, priority){
+        const todoItem = new TodoItem(title, description, dueDate, priority);
+
+        if(project.addTodoItem(todoItem))
+            return todoItem;
     }
 
-    static createProject(){
-        //should project be able to be created with the same name? if not return false
+    static createProject(todoList, name){
+        const project = new TodoProject(todoList, name);
+
+        if (!todoList.addTodoProject(project)) return;
+
+        return project;
     }
 }
 
