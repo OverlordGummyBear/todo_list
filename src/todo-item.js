@@ -7,21 +7,21 @@ class TodoItem{
 
     constructor(title, description, dueDate, priority){
         this.id = id++;//crypto.randomUUID(); //
-        this.completed = false;
+        this.isCompleted = false;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
     }
 
-    get completed(){ return this._completed; }
+    get isCompleted(){ return this._isCompleted; }
     get title(){ return this._title; }
     get description(){ return this._description; }
     get dueDate(){ return this._dueDate; }
     get priority(){ return this._priority; }
     get project(){ return this._project; }
 
-    set completed(isCompleted){ this._isCompleted = isCompleted; }
+    set isCompleted(isComplete){ this._isCompleted = isComplete; }
     set title(newTitle){ this._title = newTitle; }
     set description(newDescription){this._description = newDescription; }
     set dueDate(newDueDate){ this._dueDate = newDueDate; }
