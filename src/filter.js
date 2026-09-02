@@ -9,7 +9,10 @@ function filterByCompletion(todoItemArray, isCompleted){
 }
 
 function filterOverdue(todoItemArray){
-    return todoItemArray.filter((item) => isPast(item.dueDate) && !item.isCompleted);
+    return todoItemArray.filter((item) => 
+        isPast(item.dueDate) && 
+        !item.isCompleted &&
+        !isToday(item.dueDate));
 }
 
 export {filterToday, filterByCompletion, filterOverdue};

@@ -8,4 +8,4 @@ function sortByDate(todoItemArray){
     return [...todoItemArray].sort((a,b) => compareAsc(a.dueDate, b.dueDate));
 }
 
-export {sortByPriority, filterByDate};
+export {sortByPriority, sortByDate};
