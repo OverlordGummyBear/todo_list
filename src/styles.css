@@ -1,0 +1,29 @@
+body, html{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+}
+
+.layout-container{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 100px 1fr;
+}
+
+.header{
+    background-color: aqua;
+    grid-column: 1 / -1;
+}
+
+.sidepanel{
+    background-color: grey;
+}
+
+.task-container{
+    background-color: blue;
+}
