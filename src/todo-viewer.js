@@ -8,7 +8,13 @@ import TodoList from "./todo-list.js";
 import CreationController from "./creation-controller.js"
 
 class TodoViewer{
+    constructor(){
 
+    }
+
+    updateScreen(){
+        
+    }
 }
 
 export default TodoViewer;
