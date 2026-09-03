@@ -3,6 +3,13 @@
     src: url("./Milky-Cream.otf");
 }
 
+:root{
+    --light-red-clr: #ee6b6e;
+    --medium-red-clr: #ED5757;
+    --dark-red-clr: #D0312D;
+    --salmon-clr: #FCC9C7;
+}
+
 body, html{
     margin: 0px;
     padding: 0px;
@@ -25,9 +32,13 @@ button{
     font-family: milky-cream, sans-serif;
 }
 
+button:hover{
+    cursor: pointer;
+}
+
 /* header */
 .header{
-    background-color: #d0312d;
+    background-color: var(--dark-red-clr);
     grid-column: 1 / -1;
 
     display: flex;
@@ -40,15 +51,21 @@ h1{
 }
 
 /* side panel */
+.project-buttons-container, 
+.project-buttons-container > button,
+.filter-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .side-panel{
-    background-color: #fcc9c7;
+    background-color: var(--salmon-clr);
 }
 
 .filter-container{
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
     margin: 20px 0px;
 }
@@ -58,26 +75,28 @@ h1{
     font-size: 20px;
     text-align: left;
     background-color: white;
-    border: solid 3px #fcc9c7;
+    border: solid 3px var(--salmon-clr);
     border-radius: 10px;
     padding: 5px 10px;
 }
 
 .filter-container > button:hover{
-    border: solid 3px #d0312d;
-    cursor: pointer;
+    border: solid 3px var(--dark-red-clr);
 }
 
 .project-container{
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 20px;
 }
 
 .project-container > h2{
     font-size: 30px;
     margin-left: 5%;
     align-self: self-start;
+
+    margin: 0px auto 0px 5%;
 }
 
 .project-container > button{
@@ -85,14 +104,66 @@ h1{
     font-size: 20px;
     border-radius: 20px;
     padding: 5px 10px;
-    background-color: #ee6b6e;
-    border: 2px solid #d0312d;
+    background-color: var(--light-red-clr);
+    border: 2px solid var(--dark-red-clr);
 }
 
 .project-container > button:hover{
-    border: 2px solid #d0312d;
-    background-color: #d0312d;
-    cursor: pointer;
+    border: 2px solid var(--dark-red-clr);
+    background-color: var(--dark-red-clr);
+}
+
+.projects{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+}
+
+.project-card{
+    display: flex;
+    background-color: var(--dark-red-clr);
+    border: 3px solid var(--dark-red-clr);
+    border-radius: 10px;
+    
+    height: 35px;
+}
+
+.project-card:hover{
+    border: 3px solid var(--medium-red-clr);
+}
+
+.project-card > button{
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.project-buttons-container{
+    gap: 5px;
+    margin-right: 5px;
+}
+
+.project-buttons-container > button{
+    border: 3px solid var(--dark-red-clr);
+    height: 30px;
+}
+
+.project-buttons-container button:hover{
+    border: 3px solid var(--medium-red-clr);
+}
+
+.project-card img{
+    height: 25px;
+}
+
+.project-card button{
+    background-color: var(--dark-red-clr);
+    border: 3px solid var(--dark-red-clr);
+    border-radius: 10px;
 }
 
 /* task container */
