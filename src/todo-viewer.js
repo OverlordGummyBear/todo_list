@@ -32,26 +32,31 @@ class TodoViewer{
             const projectButton = document.createElement("button");
             projectButton.textContent = project.name;
 
-            //Edit/Delete div
-            const changeProjectButtonDiv = document.createElement("div");
-            changeProjectButtonDiv.classList = "project-buttons-container";
+            if(project.name !== "Inbox"){ 
+                //Edit/Delete div
+                const changeProjectButtonDiv = document.createElement("div");
+                changeProjectButtonDiv.classList = "project-buttons-container";
 
-            const projectEditButton = document.createElement("button");
-            const editSVG = document.createElement("img");
-            editSVG.src = NoteEdit;
-            editSVG.alt = "Project Edit button";
-            projectEditButton.appendChild(editSVG);
+                const projectEditButton = document.createElement("button");
+                const editSVG = document.createElement("img");
+                editSVG.src = NoteEdit;
+                editSVG.alt = "Project Edit button";
+                projectEditButton.appendChild(editSVG);
 
-            const projectDeleteButton = document.createElement("button");
-            const deleteSVG = document.createElement("img");
-            deleteSVG.src = TrashCan;
-            deleteSVG.alt = "Project Delete button";
-            projectDeleteButton.appendChild(deleteSVG);
+                const projectDeleteButton = document.createElement("button");
+                const deleteSVG = document.createElement("img");
+                deleteSVG.src = TrashCan;
+                deleteSVG.alt = "Project Delete button";
+                projectDeleteButton.appendChild(deleteSVG);
 
-            //Append elements
-            changeProjectButtonDiv.append(projectEditButton, projectDeleteButton);
+                //Append elements
+                changeProjectButtonDiv.append(projectEditButton, projectDeleteButton);
+                projectCardDiv.append(projectButton, changeProjectButtonDiv);
+            } else{
+                projectCardDiv.appendChild(projectButton)
+            }
 
-            projectCardDiv.append(projectButton, changeProjectButtonDiv);
+            
 
             projectDiv.appendChild(projectCardDiv);
         });

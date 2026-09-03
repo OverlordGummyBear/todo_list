@@ -137,9 +137,13 @@ h1{
 .project-card > button{
     font-size: 20px;
     height: 100%;
-    width: 100%;
+    width: 209px;
     text-align: left;
     padding-left: 10px;
+    /*Prevent overflow*/
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .project-buttons-container{

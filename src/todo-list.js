@@ -5,10 +5,13 @@ class TodoList{
     
     constructor(){
         const defaultTodoProject = new TodoProject("Inbox");
+        const secondTodoProject = new TodoProject("Secondfdafdsafsdafsdf"); //remove later
 
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);
         this.activeProject = this.defaultId;
+
+        this.todoProjectList.push(secondTodoProject); //remove later
     }
 
     get todoProjectList(){ return this._todoProjectList; }
