@@ -174,3 +174,39 @@ h1{
 .task-container{
     
 }
+
+.current-project{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.current-project > h2{
+    font-size: 30px;
+    margin: 15px auto;
+}
+
+hr{
+    width: 90%;
+    background-color: var(--light-red-clr);
+    height: 5px;
+    border: none;
+    margin: auto 0;
+}
+
+/*dialogs*/
+#project-dialog{
+    height: 200px;
+    width: 450px;
+
+    border: none;
+    border-radius: 50px;
+}
+
+.project-creation-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}

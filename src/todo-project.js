@@ -1,13 +1,13 @@
 import TodoItem from "./todo-item.js";
 
-let id = 0;
+//let id = 0;
 
 class TodoProject{
     _todoList;
     _todoItemList = [];
     
     constructor(name){
-        this.id = id++; //crypto.randomUUID(); //
+        this.id = crypto.randomUUID(); //id++; // //do not change to int for now as it causes an error
         this.name = name;
     }
 

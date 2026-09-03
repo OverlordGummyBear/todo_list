@@ -11,7 +11,7 @@ class CreationController{
     }
 
     static createProject(todoList, name){
-        const project = new TodoProject(todoList, name);
+        const project = new TodoProject(name);
 
         if (!todoList.addTodoProject(project)) return;
 

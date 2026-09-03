@@ -29,11 +29,30 @@
         </div>
 
         <div class="task-container">
-            <dialog id="project-dialog">
-                <p>This is the project dialog</p>
-                <button command="close" commandfor="project-dialog"> Close </button>
-            </dialog>
+            <div class="current-project">
+                <h2 class="current-project-header"> Testing </h2>
+                <hr>
+            </div>
+
+            <div>
+
+            </div>
         </div>
+
+        <dialog id="project-dialog">
+            <div>
+                <h2> New Project </h2>
+            </div>
+            
+            <form class="project-creation-form">
+                <label for="projectName">Project Name</label>
+                <input type="text" id="projectName" name="projectName" required>
+                <div>
+                    <button type="submit"> Save </button>
+                    <button type="button" command="close" commandfor="project-dialog"> Cancel </button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 </html>
