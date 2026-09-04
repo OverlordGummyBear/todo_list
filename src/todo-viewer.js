@@ -105,10 +105,6 @@ class TodoViewer{
     openProjectDialog(projectId = null){
         const formh2 = document.querySelector(".project-form-H2");
 
-        console.log(this.projectDialog.dataset.editingId);
-
-        console.log("OpenProjectDialog: " + projectId)
-
         if(projectId){
             formh2.textContent = "Edit project";
 

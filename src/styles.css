@@ -108,11 +108,16 @@ h1{
     font-size: 20px;
     border-radius: 20px;
     padding: 5px 10px;
+}
+
+.project-container > button,
+.save-button{
     background-color: var(--light-red-clr);
     border: 2px solid var(--dark-red-clr);
 }
 
-.project-container > button:hover{
+.project-container > button:hover,
+.save-button:hover{
     border: 2px solid var(--dark-red-clr);
     background-color: var(--dark-red-clr);
 }
@@ -237,6 +242,16 @@ hr{
 .project-creation-form button{
     font-size: 20px;
     width: 120px;
+    border-radius: 10px;
+}
+
+.close-button{
+    background-color: white;
+    border: 2px solid grey;
+}
+
+.close-button:hover{
+    background-color: grey;
 }
 
 .project-creation-form > div{
