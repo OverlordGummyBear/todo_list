@@ -15,21 +15,29 @@ class TodoViewer{
         this.todoList = new TodoList();
         this.projectDiv = document.querySelector(".projects");
         this.currentProjectH2 = document.querySelector(".current-project-header");
-
-        //Dialogs and forms
         this.projectDialog = document.querySelector("#project-dialog");
 
+        //Dialogs and forms
+        //Open New Project Dialog without ID
+        this.createProjectButton = document.querySelector(".create-project-button");
+        this.createProjectButton.addEventListener("click", () => this.openProjectDialog() );
+
+        //Create or save project
         this.projectForm = document.querySelector(".project-creation-form");
         this.projectForm.addEventListener("submit", (event) => {
             event.preventDefault();
             
             const editingId = this.projectDialog.dataset.editingId;
 
+            console.log(editingId)
+
             if(editingId)
                 this.todoList.getTodoProject(editingId).name = projectName.value;
-            else
+            else{
                 CreationController.createProject(this.todoList, projectName.value);
+            }
 
+            delete this.projectDialog.dataset.editingId;
             this.projectDialog.close();
             this.updateScreen();
         })
@@ -95,13 +103,23 @@ class TodoViewer{
     }
 
     openProjectDialog(projectId = null){
+        const formh2 = document.querySelector(".project-form-H2");
+
+        console.log(this.projectDialog.dataset.editingId);
+
+        console.log("OpenProjectDialog: " + projectId)
+
         if(projectId){
+            formh2.textContent = "Edit project";
+
             const project = this.todoList.getTodoProject(projectId);
             this.projectForm.elements.projectName.value = project.name;
             this.projectDialog.dataset.editingId = projectId;
         } else {
+            formh2.textContent = "New project";
+            
             this.projectForm.reset();
-            delete dialog.dataset.editingId;
+            delete this.projectDialog.dataset.editingId;
         }
 
         this.projectDialog.showModal();

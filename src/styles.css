@@ -10,10 +10,13 @@
     --salmon-clr: #FCC9C7;
 }
 
+*{
+    box-sizing: border-box;
+}
+
 body, html{
     margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
 }
 
 body{
@@ -53,7 +56,8 @@ h1{
 /* side panel */
 .project-buttons-container, 
 .project-buttons-container > button,
-.filter-container{
+.filter-container,
+#project-dialog > :first-child{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -197,16 +201,45 @@ hr{
 
 /*dialogs*/
 #project-dialog{
-    height: 200px;
-    width: 450px;
+    height: 250px;
+    width: 500px;
 
     border: none;
     border-radius: 50px;
+    padding: 0px;
 }
 
 .project-creation-form{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 20px;
+    width: 100%;
+    height: 70%;
+}
+
+#project-dialog > :first-child{
+    height: 30%;
+    background-color: var(--dark-red-clr);
+}
+
+.project-creation-form > label{
+    font-size: 20px;
+}
+
+.project-creation-form > input{
+    box-sizing: border-box;
+    font-size: 20px;
+    width: 300px;
+}
+
+.project-creation-form button{
+    font-size: 20px;
+    width: 120px;
+}
+
+.project-creation-form > div{
+    display: flex;
+    gap: 60px
 }
