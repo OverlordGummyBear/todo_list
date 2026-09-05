@@ -103,21 +103,24 @@ h1{
     margin: 0px auto 0px 5%;
 }
 
-.project-container > button{
+.create-project-button,
+.add-task-button{
     width: 90%;
     font-size: 20px;
     border-radius: 20px;
     padding: 5px 10px;
 }
 
-.project-container > button,
-.save-button{
+.create-project-button,
+.save-button,
+.add-task-button{
     background-color: var(--light-red-clr);
     border: 2px solid var(--dark-red-clr);
 }
 
-.project-container > button:hover,
-.save-button:hover{
+.create-project-button:hover,
+.save-button:hover,
+.add-task-button:hover{
     border: 2px solid var(--dark-red-clr);
     background-color: var(--dark-red-clr);
 }
@@ -181,7 +184,12 @@ h1{
 
 /* task container */
 .task-container{
-    
+    display: flex;
+    flex-direction: column;
+}
+
+.display-task-container{
+    flex: 1 1 auto;
 }
 
 .current-project{
@@ -202,6 +210,11 @@ hr{
     height: 5px;
     border: none;
     margin: auto 0;
+}
+
+.add-task-button{
+    width: 200px;
+    margin: 20px 0px;
 }
 
 /*dialogs*/
