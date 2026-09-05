@@ -16,31 +16,32 @@ class TodoViewer{
         this.projectDiv = document.querySelector(".projects");
         this.currentProjectH2 = document.querySelector(".current-project-header");
         this.projectDialog = document.querySelector("#project-dialog");
+        this.taskDialog = document.querySelector("#task-dialog");
 
         //Dialogs and forms
         //Open New Project Dialog without ID
         this.createProjectButton = document.querySelector(".create-project-button");
-        this.createProjectButton.addEventListener("click", () => this.openProjectDialog() );
+        this.createProjectButton.addEventListener("click", () => this.openProjectDialog());
 
         //Create or save project
         this.projectForm = document.querySelector(".project-creation-form");
         this.projectForm.addEventListener("submit", (event) => {
             event.preventDefault();
             
-            const editingId = this.projectDialog.dataset.editingId;
+            this.saveProject();
+        });
 
-            console.log(editingId)
+        //Open New Task Dialog without ID
+        this.addTaskButton = document.querySelector(".add-task-button");
+        this.addTaskButton.addEventListener("click", () => this.openTaskDialog());
 
-            if(editingId)
-                this.todoList.getTodoProject(editingId).name = projectName.value;
-            else{
-                CreationController.createProject(this.todoList, projectName.value);
-            }
+        //Create or save task
+        this.taskForm = document.querySelector(".task-creation-form");
+        this.taskForm.addEventListener("submit", (event) => {
+            event.preventDefault();
 
-            delete this.projectDialog.dataset.editingId;
-            this.projectDialog.close();
-            this.updateScreen();
-        })
+            this.saveTask();
+        });
 
         this.updateScreen();
     }
@@ -106,19 +107,49 @@ class TodoViewer{
         const formh2 = document.querySelector(".project-form-H2");
 
         if(projectId){
-            formh2.textContent = "Edit project";
-
+            formh2.textContent = "Edit Project";
             const project = this.todoList.getTodoProject(projectId);
             this.projectForm.elements.projectName.value = project.name;
             this.projectDialog.dataset.editingId = projectId;
         } else {
-            formh2.textContent = "New project";
-            
+            formh2.textContent = "New Project";
             this.projectForm.reset();
             delete this.projectDialog.dataset.editingId;
         }
 
         this.projectDialog.showModal();
+    }
+
+    saveProject(){
+        const editingId = this.projectDialog.dataset.editingId;
+
+        if(editingId)
+            this.todoList.getTodoProject(editingId).name = projectName.value;
+        else{
+            CreationController.createProject(this.todoList, projectName.value);
+        }
+
+        delete this.projectDialog.dataset.editingId;
+        this.projectDialog.close();
+        this.updateScreen();
+    }
+
+    openTaskDialog(taskId = null){
+        const formh2 = document.querySelector(".task-form-H2");
+
+        if(taskId){
+            formh2.textContent = "Edit Task";
+        } else {
+            formh2.textContent = "New Task"
+            this.taskForm.reset();
+            //delete this.dataset.dataset.editingId;
+        }
+
+        this.taskDialog.showModal();
+    }
+
+    saveTask(){
+
     }
 }
 

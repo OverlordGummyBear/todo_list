@@ -49,11 +49,52 @@
                 <label for="projectName">Project Name</label>
                 <input type="text" id="projectName" name="projectName" required>
                 <div>
-                    <button class="save-button" type="submit"> Save </button>
-                    <button class="close-button" type="button" command="close" commandfor="project-dialog"> Cancel </button>
+                    <button id="project-save-button" class="save-button" type="submit"> Save </button>
+                    <button id="project-close-button" class="close-button" type="button" command="close" commandfor="project-dialog"> Cancel </button>
                 </div>
             </form>
         </dialog>
+
+        <dialog id="task-dialog">
+            <div>
+                <h2 class="task-form-H2"> New Task </h2>
+            </div>
+
+            <form class="task-creation-form">
+                <div>
+                    <label for="taskName">Title</label>
+                    <input type="text" id="taskName" name="taskName" class="input" required>
+                </div>
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" class="input" rows="8"></textarea>
+                </div>
+                <div>
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" name="dueDate" class="input">
+                </div>
+                <div>
+                    <label for="priority">Priority</label>
+                    <select id="priority" class="input">
+                        <option value="4"> None </option>
+                        <option value="3"> Low </option>
+                        <option value="2"> Medium </option>
+                        <option value="1"> High </option>
+                    </select>
+                </div>
+                <div>
+                    <label for="projectId"> Project </label>
+                    <select id="projectId" class="input">
+                        <option> Placeholder for now </option> <!--use js to render all available projects-->
+                    </select>
+                </div>
+                <div class="dialog-button-div">
+                    <button class="save-button" type="submit" id="task-save-button"> Save </button>
+                    <button class="close-button" id="task-close-button" type="button" command="close" commandfor="task-dialog"> Cancel </button>
+                </div>
+            </form>
+        </dialog>
+
     </div>
 </body>
 </html>

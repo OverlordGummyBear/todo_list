@@ -57,7 +57,8 @@ h1{
 .project-buttons-container, 
 .project-buttons-container > button,
 .filter-container,
-#project-dialog > :first-child{
+#project-dialog > :first-child,
+#task-dialog > :first-child{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,13 +219,16 @@ hr{
 }
 
 /*dialogs*/
-#project-dialog{
-    height: 250px;
-    width: 500px;
-
+#project-dialog,
+#task-dialog{
     border: none;
     border-radius: 50px;
     padding: 0px;
+}
+
+#project-dialog{
+    height: 250px;
+    width: 500px;
 }
 
 .project-creation-form{
@@ -242,20 +246,30 @@ hr{
     background-color: var(--dark-red-clr);
 }
 
-.project-creation-form > label{
+.project-creation-form > label,
+.task-creation-form label{
     font-size: 20px;
 }
 
-.project-creation-form > input{
+.project-creation-form > input,
+.input{
     box-sizing: border-box;
     font-size: 20px;
     width: 300px;
 }
 
-.project-creation-form button{
+.save-button,
+.close-button{
     font-size: 20px;
     width: 120px;
     border-radius: 10px;
+}
+
+.project-creation-form > div,
+.dialog-button-div{
+    display: flex;
+    justify-content: center;
+    gap: 60px
 }
 
 .close-button{
@@ -267,7 +281,36 @@ hr{
     background-color: grey;
 }
 
-.project-creation-form > div{
+.task-creation-form{
     display: flex;
-    gap: 60px
+    flex-direction: column;
+    gap: 10px;
+}
+#task-dialog h2{
+    margin: 0px;
+}
+
+#task-dialog > :first-child{
+    height: 10%;
+    background-color: var(--dark-red-clr);
+    margin-bottom: 10px;
+}
+
+#task-dialog{
+    width: 450px;
+    height: 630px;
+}
+
+.task-creation-form > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-creation-form > :last-child{
+    flex-direction: row;
+}
+
+.dialog-button-div{
+    margin-top: 20px;
 }
