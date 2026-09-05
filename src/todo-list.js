@@ -1,3 +1,4 @@
+import CreationController from "./creation-controller.js";
 import TodoProject from "./todo-project.js";
 
 class TodoList{
@@ -6,6 +7,8 @@ class TodoList{
     constructor(){
         const defaultTodoProject = new TodoProject("Inbox");
         const secondTodoProject = new TodoProject("Secondly"); //remove later
+
+        CreationController.createItem(defaultTodoProject, "A title", "A description", new Date(2026, 1, 1), 1)
 
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);

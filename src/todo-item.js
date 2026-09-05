@@ -10,7 +10,7 @@ class TodoItem{
         this.isCompleted = false;
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+        this.dueDate = dueDate; //maybe create the new Date here instead of passing it
         this.priority = priority;
     }
 

@@ -17,6 +17,7 @@ class TodoViewer{
         this.currentProjectH2 = document.querySelector(".current-project-header");
         this.projectDialog = document.querySelector("#project-dialog");
         this.taskDialog = document.querySelector("#task-dialog");
+        //this.taskDialog.dataset.projectId = this.todoList.activeProject.getId();
 
         //Dialogs and forms
         //Open New Project Dialog without ID
@@ -96,11 +97,17 @@ class TodoViewer{
 
             this.projectDiv.appendChild(projectCardDiv);
         });
+
+        this.todoList.activeProject.todoItemList.forEach((item) => {
+            console.log(item);
+        })
     }
 
     changeProjectView(projectId){
         this.todoList.activeProject = projectId;
         this.currentProjectH2.textContent = this.todoList.activeProject.name;
+
+        //this.taskDialog.dataset.editingId = this.todoList.activeProject.getId();
     }
 
     openProjectDialog(projectId = null){
@@ -125,9 +132,8 @@ class TodoViewer{
 
         if(editingId)
             this.todoList.getTodoProject(editingId).name = projectName.value;
-        else{
+        else
             CreationController.createProject(this.todoList, projectName.value);
-        }
 
         delete this.projectDialog.dataset.editingId;
         this.projectDialog.close();
@@ -149,7 +155,9 @@ class TodoViewer{
     }
 
     saveTask(){
+        //const editingId = this.taskDialog.dataset.editingId;
 
+        //CreationController.createItem(this.todoList.getTodoProject(projectId.value), taskName.value, description.value, new Date(dueDate.value), priority.value)
     }
 }
 

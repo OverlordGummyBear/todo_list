@@ -191,6 +191,9 @@ h1{
 
 .display-task-container{
     flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .current-project{
@@ -216,6 +219,39 @@ hr{
 .add-task-button{
     width: 200px;
     margin: 20px 0px;
+}
+
+.item-card{
+    display: flex;
+    align-items: center;
+    width: 500px;
+    height: 100px;
+    background-color: #F2F3F4;
+    border-radius: 20px;
+    gap: 10px;
+}
+
+.item-content{
+    width: 20px;
+    background-color: #D0312D;
+    height: 100%;
+    border-radius: 20px 0px 0px 20px; 
+}
+
+.item-card p{
+    margin: 0px;
+}
+
+.item-card h3{
+    margin: 5px 0px;
+}
+
+.item-card :nth-child(3){
+    width: 70%;
+} 
+
+#task-done{
+     transform: scale(1.5)
 }
 
 /*dialogs*/
