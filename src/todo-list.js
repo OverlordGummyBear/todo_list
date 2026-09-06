@@ -1,6 +1,8 @@
 import CreationController from "./creation-controller.js";
 import TodoProject from "./todo-project.js";
 
+import { format } from "date-fns";
+
 class TodoList{
     _todoProjectList = [];
     
@@ -8,7 +10,7 @@ class TodoList{
         const defaultTodoProject = new TodoProject("Inbox");
         const secondTodoProject = new TodoProject("Secondly"); //remove later
 
-        CreationController.createItem(defaultTodoProject, "A title", "A description", new Date(2026, 1, 1), 1)
+        CreationController.createItem(defaultTodoProject, "A title", "A description", format(new Date(2026, 1, 1), "dd/MM/yyyy"), 1)
 
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);

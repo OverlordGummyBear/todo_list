@@ -61,7 +61,7 @@ class TodoViewer{
                     this.todoList.activeProject, //getTodoProject(projectId.value),
                     taskName.value,
                     description.value,
-                    dueDate.value !== "" ? new Date(dueDate.value) : undefined,
+                    dueDate.value !== "" ? format(new Date(2026, 1, 1), "dd/MM/yyyy") : undefined,
                     priority.value
                 )
             }
@@ -81,6 +81,7 @@ class TodoViewer{
         this.projectDiv.textContent = "";
         this.currentProjectH2.textContent = this.todoList.activeProject.name; //make sure it  can also show the filters e.g. all, today, week, completed
 
+        //display projects
         this.todoList.todoProjectList.forEach(project => {
             //Project div container
             const projectCardDiv = document.createElement("div");
@@ -127,8 +128,67 @@ class TodoViewer{
             this.projectDiv.appendChild(projectCardDiv);
         });
 
+
+        //display items
+        const itemContainer = document.querySelector(".display-task-container");
+        itemContainer.textContent = "";
+        
         this.todoList.activeProject.todoItemList.forEach((item) => {
-            //console.log(item);
+            const itemCard = document.createElement("div");
+            itemCard.classList = "item-card";
+
+            const priorityMarker = document.createElement("div");
+            priorityMarker.classList = `priority-marker priority${item.priority}`;
+
+            const inputCheckbox = document.createElement("input");
+            inputCheckbox.id = "task-done";
+            inputCheckbox.type = "checkBox";
+            inputCheckbox.name = "task-done";
+
+            const itemTextDiv = document.createElement("div");
+
+                const itemTitle = document.createElement("h3");
+                itemTitle.textContent = item.title;
+
+                const itemDescription = document.createElement("p");
+                itemDescription.textContent = item.description;
+
+                const itemDueDate = document.createElement("p");
+                itemDueDate.textContent = item.dueDate === undefined ? "" : item.dueDate;
+
+                itemTextDiv.append(itemTitle, itemDescription, itemDueDate);
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.classList = "task-buttons-container";
+
+                const taskEditButton = document.createElement("button");
+                const editSVG = document.createElement("img");
+                editSVG.src = NoteEdit;
+                editSVG.alt = "Project Edit button";
+                taskEditButton.appendChild(editSVG);
+
+                taskEditButton.addEventListener("click", () => {
+                    //logic
+                })
+
+                const taskDeleteButton = document.createElement("button");
+                const deleteSVG = document.createElement("img");
+                deleteSVG.src = TrashCan;
+                deleteSVG.alt = "Project Delete button";
+                taskDeleteButton.appendChild(deleteSVG);
+                
+                taskDeleteButton.addEventListener("click", () => {
+                    item.delete();
+
+                    this.updateScreen();
+                });
+
+                buttonContainer.append(taskEditButton, taskDeleteButton);
+
+            itemCard.append(priorityMarker, inputCheckbox, itemTextDiv, buttonContainer);
+
+            //Append item card
+            itemContainer.appendChild(itemCard);
         })
     }
 
@@ -172,15 +232,34 @@ class TodoViewer{
     openTaskDialog(taskId = null){
         const formh2 = document.querySelector(".task-form-H2");
 
+        const projectSelect = document.querySelector("#projectId")
+        projectSelect.textContent = "";
 
-        //maybe try to set value of the option to the active project if a new task and to the project associated with the task if you are editing it
+        //add ? : check when you edit a task so it shows the current project it is related to as the default option
+
+        const currentProjectOption = document.createElement("option");
+        currentProjectOption.textContent = this.todoList.activeProject.name;
+        currentProjectOption.value = this.todoList.activeProject.getId();
+        projectSelect.appendChild(currentProjectOption);
+
+        this.todoList.todoProjectList.forEach((project) => {
+            if(project === this.todoList.activeProject) return;
+
+            const projectOption = document.createElement("option");
+            projectOption.textContent = project.name;
+            projectOption.value = project.getId();
+            projectSelect.appendChild(projectOption);
+        });
+
+        //maybe try to set value of the option to the active project if a new task 
+        // and to the project associated with the task if you are editing it
 
         if(taskId){
             formh2.textContent = "Edit Task";
         } else {
             formh2.textContent = "New Task"
             this.taskForm.reset();
-            //delete this.dataset.dataset.editingId;
+            delete this.taskDialog.dataset.editingId;
         }
 
         this.taskDialog.showModal();

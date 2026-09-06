@@ -58,7 +58,9 @@ h1{
 .project-buttons-container > button,
 .filter-container,
 #project-dialog > :first-child,
-#task-dialog > :first-child{
+#task-dialog > :first-child,
+.task-buttons-container,
+.task-buttons-container > button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,7 +87,8 @@ h1{
     padding: 5px 10px;
 }
 
-.filter-container > button:hover{
+.filter-container > button:hover,
+.task-buttons-container button:hover{
     border: solid 3px var(--dark-red-clr);
 }
 
@@ -167,6 +170,7 @@ h1{
 .project-buttons-container > button{
     border: 3px solid var(--dark-red-clr);
     height: 30px;
+    
 }
 
 .project-buttons-container button:hover{
@@ -232,7 +236,7 @@ hr{
     gap: 10px;
 }
 
-.item-content{
+.priority-marker{
     width: 20px;
     height: 100%;
     border-radius: 20px 0px 0px 20px; 
@@ -268,6 +272,24 @@ hr{
 
 #task-done{
      transform: scale(1.5)
+}
+
+.task-buttons-container{
+    gap: 5px;
+    width: 110px;
+    margin-right: 20px;
+}
+
+.task-buttons-container img{
+    height: 30px;
+    width: 30px;
+}
+
+.task-buttons-container button{
+    margin: 0px;
+    padding: 5px;
+    border: 3px solid #F2F3F4;
+    border-radius: 10px;
 }
 
 /*dialogs*/

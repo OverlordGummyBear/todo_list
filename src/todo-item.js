@@ -6,7 +6,7 @@ class TodoItem{
     _project;
 
     constructor(title, description, dueDate, priority){
-        this.id = id++;//crypto.randomUUID(); //
+        this.id = crypto.randomUUID();
         this.isCompleted = false;
         this.title = title;
         this.description = description;
@@ -14,6 +14,7 @@ class TodoItem{
         this.priority = priority;
     }
 
+    getId(){ return this.id };
     get isCompleted(){ return this._isCompleted; }
     get title(){ return this._title; }
     get description(){ return this._description; }
@@ -29,7 +30,7 @@ class TodoItem{
     set project(newProjectRef){this._project = newProjectRef; }
 
     delete(){
-        return this._project.removeTodoItem(this._id);
+        return this._project.removeTodoItem(this.getId());
     }
 
     update(project, title, description, dueDate, priority){
