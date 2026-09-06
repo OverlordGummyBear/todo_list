@@ -41,7 +41,36 @@ class TodoViewer{
         this.taskForm.addEventListener("submit", (event) => {
             event.preventDefault();
 
-            this.saveTask();
+            console.log("Title: " + taskName.value);
+            console.log("Description: " + description.value);
+            console.log("Due date: " + dueDate.value);
+            console.log("Priority: " + priority.value);
+            console.log("Project: " + projectId.value);
+
+            console.log("Date beneath")
+            console.log(new Date(dueDate.value));
+            console.log("------")
+            console.log("" === dueDate.value); //duedate is "" if no date defined
+
+            const editingId = this.taskDialog.dataset.editingId;
+
+            if(editingId){
+                console.log("You are editing a task")
+            } else {
+                CreationController.createItem(
+                    this.todoList.activeProject, //getTodoProject(projectId.value),
+                    taskName.value,
+                    description.value,
+                    dueDate.value !== "" ? new Date(dueDate.value) : undefined,
+                    priority.value
+                )
+            }
+
+            delete this.taskDialog.dataset.editingId;
+            this.taskDialog.close();
+            this.updateScreen();
+
+            //this.saveTask();
         });
 
         this.updateScreen();
@@ -99,7 +128,7 @@ class TodoViewer{
         });
 
         this.todoList.activeProject.todoItemList.forEach((item) => {
-            console.log(item);
+            //console.log(item);
         })
     }
 
@@ -143,6 +172,9 @@ class TodoViewer{
     openTaskDialog(taskId = null){
         const formh2 = document.querySelector(".task-form-H2");
 
+
+        //maybe try to set value of the option to the active project if a new task and to the project associated with the task if you are editing it
+
         if(taskId){
             formh2.textContent = "Edit Task";
         } else {
@@ -158,6 +190,7 @@ class TodoViewer{
         //const editingId = this.taskDialog.dataset.editingId;
 
         //CreationController.createItem(this.todoList.getTodoProject(projectId.value), taskName.value, description.value, new Date(dueDate.value), priority.value)
+        
     }
 }
 

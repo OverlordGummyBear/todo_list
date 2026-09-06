@@ -194,6 +194,7 @@ h1{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 
 .current-project{
@@ -233,9 +234,24 @@ hr{
 
 .item-content{
     width: 20px;
-    background-color: #D0312D;
     height: 100%;
     border-radius: 20px 0px 0px 20px; 
+}
+
+.priority1{
+    background-color: #D0312D;
+}
+
+.priority2{
+    background-color: orange;
+}
+
+.priority3{
+    background-color: blue;
+}
+
+.priority4{
+    background-color: #F2F3F4;
 }
 
 .item-card p{
