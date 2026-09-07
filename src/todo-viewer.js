@@ -57,25 +57,7 @@ class TodoViewer{
                 this.isFilterActive = true;
                 this.currentFilter = button.value;
 
-                const allItems = sortByPriority(this.todoList.getAllTodoItems());
-
-                switch(button.value){
-                    case "All":
-                        this.filterArray = allItems;
-                        break;
-                    case "Today":
-                        this.filterArray = filterToday(allItems);
-                        break;
-                    case "Week":
-                        this.filterArray = allItems;
-                        break;
-                    case "Overdue":
-                        this.filterArray = filterOverdue(allItems);
-                        break;
-                    case "Completed":
-                        this.filterArray = allItems;
-                        break;
-                }
+                this.filterItems(button.value);
 
                 this.updateScreen();
             })
@@ -141,6 +123,8 @@ class TodoViewer{
         const itemContainer = document.querySelector(".display-task-container");
         itemContainer.textContent = "";
 
+        this.filterItems(this.currentFilter);
+
         const activeArray = this.isFilterActive === true 
             ? this.filterArray
             : sortByPriority(this.todoList.activeProject.todoItemList); 
@@ -204,6 +188,28 @@ class TodoViewer{
             //Append item card
             itemContainer.appendChild(itemCard);
         })
+    }
+
+    filterItems(filterValue){
+        const allItems = sortByPriority(this.todoList.getAllTodoItems());
+
+        switch(filterValue){
+            case "All":
+                this.filterArray = allItems;
+                break;
+            case "Today":
+                this.filterArray = filterToday(allItems);
+                break;
+            case "Week":
+                this.filterArray = allItems;
+                break;
+            case "Overdue":
+                this.filterArray = filterOverdue(allItems);
+                break;
+            case "Completed":
+                this.filterArray = allItems;
+                break;
+        }
     }
 
     changeProjectView(projectId){
