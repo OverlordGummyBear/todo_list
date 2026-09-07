@@ -155,7 +155,7 @@ class TodoViewer{
                 itemDescription.classList.toggle("lineThrough", item.isCompleted);
 
                 const itemDueDate = document.createElement("p");
-                itemDueDate.textContent = item.dueDate === undefined ? "" : format(new Date(item.dueDate), "dd-MM-yyyy");
+                itemDueDate.textContent = item.dueDate === "" ? "" : format(new Date(item.dueDate), "dd-MM-yyyy");
                 itemDueDate.classList.toggle("lineThrough", item.isCompleted);
 
                 itemTextDiv.append(itemTitle, itemDescription, itemDueDate);
@@ -214,7 +214,7 @@ class TodoViewer{
                 this.filterArray = filterToday(allItems);
                 break;
             case "Week":
-                this.filterArray = filterWeek(allItems);
+                this.filterArray = sortByDate(filterWeek(allItems));
                 break;
             case "Overdue":
                 this.filterArray = filterOverdue(allItems);

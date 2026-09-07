@@ -1,22 +1,26 @@
 import CreationController from "./creation-controller.js";
 import TodoProject from "./todo-project.js";
 
-import { format } from "date-fns";
+import { format, startOfToday, endOfDay, addDays } from "date-fns";
 
 class TodoList{
     _todoProjectList = [];
     
     constructor(){
         const defaultTodoProject = new TodoProject("Inbox");
-        const secondTodoProject = new TodoProject("Secondly"); //remove later
+        const secondTodoProject = new TodoProject("Second Todo");
 
-        CreationController.createItem(defaultTodoProject, "A title", "A description", "2026-02-01", 1)
+        //Items to show app functionality
+        CreationController.createItem(defaultTodoProject, "Task for today", "A task for today", format(new Date(startOfToday()), "yyyy-MM-dd") , 3);
+        CreationController.createItem(secondTodoProject, "Task for 7 days hence", "Task for 7 days later", endOfDay(addDays(new Date(), 7)), 2);
+        CreationController.createItem(defaultTodoProject, "First Task!", "This is the description for the first task", "2026-02-01", 1);
+        CreationController.createItem(secondTodoProject, "Task with no Priority", "This task does not have a priority", "", 4)
 
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);
         this.activeProject = this.defaultId;
 
-        this.todoProjectList.push(secondTodoProject); //remove later
+        this.todoProjectList.push(secondTodoProject);
     }
 
     get todoProjectList(){ return this._todoProjectList; }
