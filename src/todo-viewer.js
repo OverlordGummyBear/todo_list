@@ -256,10 +256,16 @@ class TodoViewer{
 
         if(taskId){
             formh2.textContent = "Edit Task";
+            
         } else {
             formh2.textContent = "New Task"
             this.taskForm.reset();
             delete this.taskDialog.dataset.editingId;
+
+            //formh2.textContent = "Edit Project";
+            //const project = this.todoList.getTodoProject(projectId);
+            //this.projectForm.elements.projectName.value = project.name;
+            //this.projectDialog.dataset.editingId = projectId;
         }
 
         this.taskDialog.showModal();
