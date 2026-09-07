@@ -230,7 +230,12 @@ hr{
 .item-card{
     display: flex;
     align-items: center;
-    width: 500px;
+    /*resizes according to screen size*/
+    width: 80%;
+    min-width: 300px;
+    max-width: 700px;
+    margin: 0px 50px;
+
     height: 100px;
     background-color: #F2F3F4;
     border-radius: 20px;
