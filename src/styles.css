@@ -191,6 +191,7 @@ h1{
 .task-container{
     display: flex;
     flex-direction: column;
+    overflow: auto; /*only the task container have a scroll bar*/
 }
 
 .display-task-container{
@@ -234,6 +235,12 @@ hr{
     background-color: #F2F3F4;
     border-radius: 20px;
     gap: 10px;
+}
+
+.item-card :nth-child(3){
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .priority-marker{
