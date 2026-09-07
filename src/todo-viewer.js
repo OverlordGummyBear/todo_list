@@ -256,7 +256,7 @@ class TodoViewer{
             //Values
             this.taskForm.elements.taskName.value = todoItem.title;
             this.taskForm.elements.description.value = todoItem.description;
-            this.taskForm.elements.dueDate.value = format(todoItem.dueDate, "yyyy-MM-dd");
+            this.taskForm.elements.dueDate.value = todoItem.dueDate !== undefined ? format(todoItem.dueDate, "yyyy-MM-dd") : "";
             this.taskForm.elements.priority.value = todoItem.priority;
 
             this.taskDialog.dataset.editingId = taskId;
