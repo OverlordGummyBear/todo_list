@@ -7,17 +7,21 @@ import TrashCan from "./img/trashcan.svg";
 import NoteEdit from "./img/note-edit.svg";
 
 import { format, compareAsc, isToday } from "date-fns";
-import {filterToday, filterByCompletion, filterOverdue} from "./filter.js";
+import {filterToday, filterWeek, filterByCompletion, filterOverdue} from "./filter.js";
 import {sortByPriority, sortByDate} from "./sort.js";
 
 class TodoViewer{
     constructor(){
         this.todoList = new TodoList();
+
+        this.isFilterActive = false;
+        this.filterArray = [];
+        this.currentFilter = "";
+        
         this.projectDiv = document.querySelector(".projects");
         this.currentProjectH2 = document.querySelector(".current-project-header");
         this.projectDialog = document.querySelector("#project-dialog");
         this.taskDialog = document.querySelector("#task-dialog");
-        //this.taskDialog.dataset.projectId = this.todoList.activeProject.getId();
 
         //Dialogs and forms
         //Open New Project Dialog without ID
@@ -45,12 +49,43 @@ class TodoViewer{
         });
 
         this.updateScreen();
+
+        //Filter buttons
+        const filterButtons = document.querySelectorAll(".filter-button");
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.isFilterActive = true;
+                this.currentFilter = button.value;
+
+                const allItems = sortByPriority(this.todoList.getAllTodoItems());
+
+                switch(button.value){
+                    case "All":
+                        this.filterArray = allItems;
+                        break;
+                    case "Today":
+                        this.filterArray = filterToday(allItems);
+                        break;
+                    case "Week":
+                        this.filterArray = allItems;
+                        break;
+                    case "Overdue":
+                        this.filterArray = filterOverdue(allItems);
+                        break;
+                    case "Completed":
+                        this.filterArray = allItems;
+                        break;
+                }
+
+                this.updateScreen();
+            })
+        })
     }
 
     updateScreen(){
         //Render all created projects
         this.projectDiv.textContent = "";
-        this.currentProjectH2.textContent = this.todoList.activeProject.name; //make sure it  can also show the filters e.g. all, today, week, completed
+        this.currentProjectH2.textContent = this.isFilterActive ? this.currentFilter : this.todoList.activeProject.name;
 
         //display projects
         this.todoList.todoProjectList.forEach(project => {
@@ -85,8 +120,10 @@ class TodoViewer{
                 projectDeleteButton.appendChild(deleteSVG);
 
                 projectDeleteButton.addEventListener("click", () => {
-                    this.todoList.removeTodoProject(project.getId());
-                    this.updateScreen();
+                    if(confirm("Are you sure you want to delete this project?")){
+                        this.todoList.removeTodoProject(project.getId());
+                        this.updateScreen();
+                    }
                 })
 
                 //Append elements
@@ -103,8 +140,12 @@ class TodoViewer{
         //display items
         const itemContainer = document.querySelector(".display-task-container");
         itemContainer.textContent = "";
-        
-        this.todoList.activeProject.todoItemList.forEach((item) => {
+
+        const activeArray = this.isFilterActive === true 
+            ? this.filterArray
+            : sortByPriority(this.todoList.activeProject.todoItemList); 
+
+        activeArray.forEach((item) => {
             const itemCard = document.createElement("div");
             itemCard.classList = "item-card";
 
@@ -149,9 +190,11 @@ class TodoViewer{
                 taskDeleteButton.appendChild(deleteSVG);
                 
                 taskDeleteButton.addEventListener("click", () => {
-                    item.delete();
+                    if(confirm("Are you sure you want to delete this item?")){
+                        item.delete();
 
-                    this.updateScreen();
+                        this.updateScreen();
+                    }
                 });
 
                 buttonContainer.append(taskEditButton, taskDeleteButton);
@@ -164,6 +207,8 @@ class TodoViewer{
     }
 
     changeProjectView(projectId){
+        this.isFilterActive = false;
+
         this.todoList.activeProject = projectId;
         this.currentProjectH2.textContent = this.todoList.activeProject.name;
 
@@ -205,8 +250,6 @@ class TodoViewer{
 
         const projectSelect = document.querySelector("#projectId")
         projectSelect.textContent = "";
-
-        //add ? : check when you edit a task so it shows the current project it is related to as the default option
 
         const currentProjectOption = document.createElement("option");
         currentProjectOption.textContent = this.todoList.activeProject.name;

@@ -1,7 +1,11 @@
 import { format, compareAsc, isToday, isPast } from "date-fns";
 
 function filterToday(todoItemArray){
-    return todoItemArray.filter((item) => isToday(item.dueDate));
+    return todoItemArray.filter((item) => isToday(format(new Date(item.dueDate), "dd/MM/yyyy")));
+}
+
+function filterWeek(todoItemArray){
+    //return todoItemArray.filter((item) => isToday(item.dueDate));
 }
 
 function filterByCompletion(todoItemArray, isCompleted){
@@ -15,4 +19,4 @@ function filterOverdue(todoItemArray){
         !isToday(item.dueDate));
 }
 
-export {filterToday, filterByCompletion, filterOverdue};
+export {filterToday, filterWeek, filterByCompletion, filterOverdue};
