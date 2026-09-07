@@ -1,7 +1,5 @@
 import TodoProject from "./todo-project.js";
 
-let id = 0;
-
 class TodoItem{
     _project;
 
@@ -10,7 +8,7 @@ class TodoItem{
         this.isCompleted = false;
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate; //maybe create the new Date here instead of passing it
+        this.dueDate = dueDate;
         this.priority = priority;
     }
 
@@ -48,6 +46,25 @@ class TodoItem{
             oldProject.removeTodoItem(this.getId());
             this._project = newProject;
         }
+    }
+
+    toSaveFormat(){
+        return{
+            id: this.getId(),
+            title: this.title,
+            description: this.description,
+            dueDate: this.dueDate,
+            priority: this.priority,
+            isCompleted: this.isCompleted,
+        }
+    }
+
+    static fromSaveFormat(data, project){
+        const item = new TodoItem(data.title, data.description, data.dueDate, data.priority);
+        item.id = data.id;
+        item.isCompleted = data.isCompleted;
+        item._project = project;
+        return item;
     }
 }
 

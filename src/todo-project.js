@@ -1,13 +1,12 @@
 import TodoItem from "./todo-item.js";
 
-//let id = 0;
 
 class TodoProject{
     _todoList;
     _todoItemList = [];
     
     constructor(name){
-        this.id = crypto.randomUUID(); //id++; // //do not change to int for now as it causes an error
+        this.id = crypto.randomUUID();
         this.name = name;
     }
 
@@ -39,6 +38,24 @@ class TodoProject{
         this._todoItemList.splice(deleteIndex, 1);
 
         return true;
+    }
+
+    toSaveFormat(){
+        return{
+            id: this.getId(),
+            name: this.name,
+            todoItemList: this._todoItemList.map(item => item.toSaveFormat()),
+        };
+    }
+
+    static fromSaveFormat(data){
+        const project = new TodoProject(data.name);
+        project.id = data.id;
+        project._todoItemList = data.todoItemList.map(itemData => 
+            TodoItem.fromSaveFormat(itemData, project)
+        );
+
+        return project;
     }
 }
 

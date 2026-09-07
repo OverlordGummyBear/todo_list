@@ -11,8 +11,8 @@ import {filterToday, filterWeek, filterByCompletion, filterOverdue} from "./filt
 import {sortByPriority, sortByDate} from "./sort.js";
 
 class TodoViewer{
-    constructor(){
-        this.todoList = new TodoList();
+    constructor(todoList){
+        this.todoList = todoList;
 
         this.isFilterActive = false;
         this.filterArray = [];
@@ -205,6 +205,8 @@ class TodoViewer{
 
             //Append item card
             itemContainer.appendChild(itemCard);
+
+            this.todoList.save();
         })
     }
 
@@ -290,14 +292,18 @@ class TodoViewer{
         });
 
         if(taskId){
+            //console.log("taskId:", taskId, "projectId:", projectId);
+            //console.log("all project ids:", this.todoList.todoProjectList.map(p => p.getId()));
+
             formh2.textContent = "Edit Task";
             const project = this.todoList.getTodoProject(projectId);
+            //console.log("found project:", project);
             const todoItem = project.getTodoItem(taskId);
 
             //Values
             this.taskForm.elements.taskName.value = todoItem.title;
             this.taskForm.elements.description.value = todoItem.description;
-            this.taskForm.elements.dueDate.value = todoItem.dueDate !== undefined ? format(todoItem.dueDate, "yyyy-dd-MM") : "";
+            this.taskForm.elements.dueDate.value = todoItem.dueDate !== "" ? format(todoItem.dueDate, "yyyy-dd-MM") : "";
             this.taskForm.elements.priority.value = todoItem.priority;
 
             this.taskDialog.dataset.editingId = taskId;
@@ -315,7 +321,7 @@ class TodoViewer{
         const editingId = this.taskDialog.dataset.editingId;
 
         if(editingId){
-            const item = this.todoList.getAllTodoItems().find((item) => item.id === editingId);
+            const item = this.todoList.getAllTodoItems().find((item) => item.getId() === editingId);
             
             item.update(
                 this.todoList.getTodoProject(projectId.value),

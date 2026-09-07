@@ -1,6 +1,5 @@
 import CreationController from "./creation-controller.js";
 import TodoProject from "./todo-project.js";
-
 import { format, startOfToday, endOfDay, addDays } from "date-fns";
 
 class TodoList{
@@ -39,7 +38,7 @@ class TodoList{
     }
 
     getTodoProject(id){
-        return this._todoProjectList.find((project) => project.id === id);
+        return this._todoProjectList.find((project) => project.getId() === id);
     }
 
     get activeProject(){ return this._activeProject; }
@@ -73,6 +72,21 @@ class TodoList{
 
         this._todoProjectList.splice(projectIndex, 1);
         return true;
+    }
+
+    save(){
+        const data = this.todoProjectList.map(project => project.toSaveFormat());
+        localStorage.setItem("todoList", JSON.stringify(data));
+    }
+
+    static load(){
+        const stored = localStorage.getItem("todoList");
+        if(!stored) return new TodoList();
+
+        const data = JSON.parse(stored);
+        const list = new TodoList();
+        list._todoProjectList = data.map(projectData => TodoProject.fromSaveFormat(projectData));
+        return list;
     }
 }
 
