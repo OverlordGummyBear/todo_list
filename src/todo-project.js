@@ -11,7 +11,7 @@ class TodoProject{
     }
 
     getId(){ return this.id; }
-
+    setId(id){ this.id = id; }
     get todoItemList(){ return this._todoItemList; }
     get name(){ return this._name; }
     set name(newName){ this._name = newName; }
@@ -50,7 +50,7 @@ class TodoProject{
 
     static fromSaveFormat(data){
         const project = new TodoProject(data.name);
-        project.id = data.id;
+        project.setId(data.id);
         project._todoItemList = data.todoItemList.map(itemData => 
             TodoItem.fromSaveFormat(itemData, project)
         );

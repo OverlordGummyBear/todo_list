@@ -292,12 +292,13 @@ class TodoViewer{
         });
 
         if(taskId){
-            //console.log("taskId:", taskId, "projectId:", projectId);
-            //console.log("all project ids:", this.todoList.todoProjectList.map(p => p.getId()));
+            console.log("taskId:", taskId, "projectId:", projectId);
+            console.log("all project ids:", this.todoList.todoProjectList.map(p => p.getId()));
 
             formh2.textContent = "Edit Task";
             const project = this.todoList.getTodoProject(projectId);
             console.log("found project:", project);
+
             const todoItem = project.getTodoItem(taskId);
 
             //Values

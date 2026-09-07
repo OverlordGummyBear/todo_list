@@ -84,8 +84,14 @@ class TodoList{
         if(!stored) return new TodoList();
 
         const data = JSON.parse(stored);
-        const list = new TodoList();
-        list._todoProjectList = data.map(projectData => TodoProject.fromSaveFormat(projectData));
+        const list = Object.create(TodoList.prototype);
+        list._todoProjectList = data.map(projectData =>
+            TodoProject.fromSaveFormat(projectData)
+        );
+
+        list.defaultId = list._todoProjectList[0].id;
+        list.activeProject = list.defaultId;
+
         return list;
     }
 }

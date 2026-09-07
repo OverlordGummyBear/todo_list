@@ -20,6 +20,7 @@ class TodoItem{
     get priority(){ return this._priority; }
     get project(){ return this._project; }
 
+    setId(id){ this.id = id; }
     set isCompleted(isComplete){ this._isCompleted = isComplete; }
     set title(newTitle){ this._title = newTitle; }
     set description(newDescription){this._description = newDescription; }
@@ -61,7 +62,7 @@ class TodoItem{
 
     static fromSaveFormat(data, project){
         const item = new TodoItem(data.title, data.description, data.dueDate, data.priority);
-        item.id = data.id;
+        item.setId(data.id);
         item.isCompleted = data.isCompleted;
         item._project = project;
         return item;
