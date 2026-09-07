@@ -41,33 +41,7 @@ class TodoViewer{
         this.taskForm.addEventListener("submit", (event) => {
             event.preventDefault();
 
-            const editingId = this.taskDialog.dataset.editingId;
-
-            if(editingId){
-                const item = this.todoList.getAllTodoItems().find((item) => item.id === editingId);
-                
-                item.update(
-                    this.todoList.getTodoProject(projectId.value),
-                    taskName.value,
-                    description.value,
-                    dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
-                    priority.value
-                );
-            } else {
-                CreationController.createItem(
-                    this.todoList.getTodoProject(projectId.value),
-                    taskName.value,
-                    description.value,
-                    dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
-                    priority.value
-                )
-            }
-
-            delete this.taskDialog.dataset.editingId;
-            this.taskDialog.close();
-            this.updateScreen();
-
-            //this.saveTask();
+            this.saveTask();
         });
 
         this.updateScreen();
@@ -271,9 +245,31 @@ class TodoViewer{
     }
 
     saveTask(){
-        //const editingId = this.taskDialog.dataset.editingId;
+        const editingId = this.taskDialog.dataset.editingId;
 
-        //CreationController.createItem(this.todoList.getTodoProject(projectId.value), taskName.value, description.value, new Date(dueDate.value), priority.value)
+        if(editingId){
+            const item = this.todoList.getAllTodoItems().find((item) => item.id === editingId);
+            
+            item.update(
+                this.todoList.getTodoProject(projectId.value),
+                taskName.value,
+                description.value,
+                dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
+                priority.value
+            );
+        } else {
+            CreationController.createItem(
+                this.todoList.getTodoProject(projectId.value),
+                taskName.value,
+                description.value,
+                dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
+                priority.value
+            )
+        }
+
+        delete this.taskDialog.dataset.editingId;
+        this.taskDialog.close();
+        this.updateScreen();
     }
 }
 
