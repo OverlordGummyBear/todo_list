@@ -16,7 +16,7 @@ function filterOverdue(todoItemArray){
     return todoItemArray.filter((item) => 
         isPast(item.dueDate) && 
         !item.isCompleted &&
-        !isToday(item.dueDate));
+        !isToday(format(new Date(item.dueDate), "dd/MM/yyyy")));
 }
 
 export {filterToday, filterWeek, filterByCompletion, filterOverdue};
