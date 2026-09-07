@@ -14,7 +14,9 @@ class TodoList{
         CreationController.createItem(defaultTodoProject, "Task for today", "A task for today", format(new Date(startOfToday()), "yyyy-MM-dd") , 3);
         CreationController.createItem(secondTodoProject, "Task for 7 days hence", "Task for 7 days later", endOfDay(addDays(new Date(), 7)), 2);
         CreationController.createItem(defaultTodoProject, "First Task!", "This is the description for the first task", "2026-02-01", 1);
-        CreationController.createItem(secondTodoProject, "Task with no Priority", "This task does not have a priority", "", 4)
+        CreationController.createItem(secondTodoProject, "Task with no Priority", "This task does not have a priority", "", 4);
+        CreationController.createItem(secondTodoProject, "Another task for today", "", format(new Date(startOfToday()), "yyyy-MM-dd"), 2);
+        CreationController.createItem(defaultTodoProject, "This is another overdue task", "", "2026-06-07", 4);
 
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);
