@@ -150,7 +150,7 @@ class TodoViewer{
                 itemDescription.textContent = item.description;
 
                 const itemDueDate = document.createElement("p");
-                itemDueDate.textContent = item.dueDate === undefined ? "" : item.dueDate;
+                itemDueDate.textContent = item.dueDate === undefined ? "" : format(new Date(item.dueDate), "dd-MM-yyyy");
 
                 itemTextDiv.append(itemTitle, itemDescription, itemDueDate);
 
@@ -201,13 +201,13 @@ class TodoViewer{
                 this.filterArray = filterToday(allItems);
                 break;
             case "Week":
-                this.filterArray = allItems;
+                this.filterArray = filterWeek(allItems);
                 break;
             case "Overdue":
                 this.filterArray = filterOverdue(allItems);
                 break;
             case "Completed":
-                this.filterArray = allItems;
+                this.filterArray = filterByCompletion(allItems, true);
                 break;
         }
     }
@@ -303,7 +303,7 @@ class TodoViewer{
                 this.todoList.getTodoProject(projectId.value),
                 taskName.value,
                 description.value,
-                dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
+                dueDate.value !== "" ? dueDate.value : undefined,
                 priority.value
             );
         } else {
@@ -311,7 +311,7 @@ class TodoViewer{
                 this.todoList.getTodoProject(projectId.value),
                 taskName.value,
                 description.value,
-                dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
+                dueDate.value !== "" ? dueDate.value: undefined,
                 priority.value
             )
         }

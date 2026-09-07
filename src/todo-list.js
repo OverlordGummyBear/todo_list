@@ -10,7 +10,7 @@ class TodoList{
         const defaultTodoProject = new TodoProject("Inbox");
         const secondTodoProject = new TodoProject("Secondly"); //remove later
 
-        CreationController.createItem(defaultTodoProject, "A title", "A description", format(new Date(2026, 1, 1), "dd/MM/yyyy"), 1)
+        CreationController.createItem(defaultTodoProject, "A title", "A description", "2026-02-01", 1)
 
         this.defaultId = defaultTodoProject.id;
         this.todoProjectList.push(defaultTodoProject);
