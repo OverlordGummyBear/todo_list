@@ -41,17 +41,6 @@ class TodoViewer{
         this.taskForm.addEventListener("submit", (event) => {
             event.preventDefault();
 
-            console.log("Title: " + taskName.value);
-            console.log("Description: " + description.value);
-            console.log("Due date: " + dueDate.value);
-            console.log("Priority: " + priority.value);
-            console.log("Project: " + projectId.value);
-
-            console.log("Date beneath")
-            console.log(new Date(dueDate.value));
-            console.log("------")
-            console.log("" === dueDate.value); //duedate is "" if no date defined
-
             const editingId = this.taskDialog.dataset.editingId;
 
             if(editingId){
@@ -168,7 +157,7 @@ class TodoViewer{
                 taskEditButton.appendChild(editSVG);
 
                 taskEditButton.addEventListener("click", () => {
-                    //logic
+                    this.openTaskDialog(item.getId(), item.project.getId());
                 })
 
                 const taskDeleteButton = document.createElement("button");
@@ -229,7 +218,7 @@ class TodoViewer{
         this.updateScreen();
     }
 
-    openTaskDialog(taskId = null){
+    openTaskDialog(taskId = null, projectId = null){
         const formh2 = document.querySelector(".task-form-H2");
 
         const projectSelect = document.querySelector("#projectId")
@@ -256,7 +245,17 @@ class TodoViewer{
 
         if(taskId){
             formh2.textContent = "Edit Task";
-            
+            const project = this.todoList.getTodoProject(projectId);
+            const todoItem = project.getTodoItem(taskId);
+
+            //Values
+            this.taskForm.elements.taskName.value = todoItem.title;
+            this.taskForm.elements.description.value = todoItem.description;
+            this.taskForm.elements.dueDate.value = format(todoItem.dueDate, "yyyy-MM-dd");
+            this.taskForm.elements.priority.value = todoItem.priority;
+
+            this.taskDialog.dataset.editingId = taskId;
+
         } else {
             formh2.textContent = "New Task"
             this.taskForm.reset();
@@ -275,7 +274,6 @@ class TodoViewer{
         //const editingId = this.taskDialog.dataset.editingId;
 
         //CreationController.createItem(this.todoList.getTodoProject(projectId.value), taskName.value, description.value, new Date(dueDate.value), priority.value)
-        
     }
 }
 
