@@ -137,6 +137,7 @@ class TodoViewer{
 
             const priorityMarker = document.createElement("div");
             priorityMarker.classList = `priority-marker priority${item.priority}`;
+            priorityMarker.classList.toggle("completedTask", item.isCompleted);
 
             const inputCheckbox = document.createElement("input");
             inputCheckbox.id = "task-done";
@@ -224,7 +225,7 @@ class TodoViewer{
                 this.filterArray = filterOverdue(allItems);
                 break;
             case "Completed":
-                this.filterArray = filterByCompletion(allItems, true);
+                this.filterArray = sortByDate(filterByCompletion(allItems, true));
                 break;
         }
     }
