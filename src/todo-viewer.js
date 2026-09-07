@@ -130,6 +130,8 @@ class TodoViewer{
             : sortByPriority(this.todoList.activeProject.todoItemList); 
 
         activeArray.forEach((item) => {
+            if(item.isCompleted && this.currentFilter !== "Completed") return;
+
             const itemCard = document.createElement("div");
             itemCard.classList = "item-card";
 
@@ -140,20 +142,31 @@ class TodoViewer{
             inputCheckbox.id = "task-done";
             inputCheckbox.type = "checkBox";
             inputCheckbox.name = "task-done";
+            inputCheckbox.checked = item.isCompleted;
 
             const itemTextDiv = document.createElement("div");
 
                 const itemTitle = document.createElement("h3");
                 itemTitle.textContent = item.title;
+                itemTitle.classList.toggle("lineThrough", item.isCompleted);
 
                 const itemDescription = document.createElement("p");
                 itemDescription.textContent = item.description;
+                itemDescription.classList.toggle("lineThrough", item.isCompleted);
 
                 const itemDueDate = document.createElement("p");
                 itemDueDate.textContent = item.dueDate === undefined ? "" : format(new Date(item.dueDate), "dd-MM-yyyy");
+                itemDueDate.classList.toggle("lineThrough", item.isCompleted);
 
                 itemTextDiv.append(itemTitle, itemDescription, itemDueDate);
 
+            //Cross out items in itemTextDiv
+            inputCheckbox.addEventListener("change", (event) => {
+                item.isCompleted = inputCheckbox.checked;
+
+                this.updateScreen();
+            })
+            
             const buttonContainer = document.createElement("div");
             buttonContainer.classList = "task-buttons-container";
 
