@@ -297,7 +297,7 @@ class TodoViewer{
 
             formh2.textContent = "Edit Task";
             const project = this.todoList.getTodoProject(projectId);
-            //console.log("found project:", project);
+            console.log("found project:", project);
             const todoItem = project.getTodoItem(taskId);
 
             //Values
@@ -320,24 +320,30 @@ class TodoViewer{
     saveTask(){
         const editingId = this.taskDialog.dataset.editingId;
 
-        if(editingId){
+        const projectIdValue = this.taskForm.elements.projectId.value;
+        const taskNameValue = this.taskForm.elements.taskName.value;
+        const descriptionValue = this.taskForm.elements.description.value;
+        const dueDateValue = this.taskForm.elements.dueDate.value;
+        const priorityValue = this.taskForm.elements.priority.value;
+
+        if (editingId) {
             const item = this.todoList.getAllTodoItems().find((item) => item.getId() === editingId);
-            
+
             item.update(
-                this.todoList.getTodoProject(projectId.value),
-                taskName.value,
-                description.value,
-                dueDate.value !== "" ? dueDate.value : undefined,
-                priority.value
+                this.todoList.getTodoProject(projectIdValue),
+                taskNameValue,
+                descriptionValue,
+                dueDateValue !== "" ? dueDateValue : "",
+                priorityValue
             );
         } else {
             CreationController.createItem(
-                this.todoList.getTodoProject(projectId.value),
-                taskName.value,
-                description.value,
-                dueDate.value !== "" ? dueDate.value: "",
-                priority.value
-            )
+                this.todoList.getTodoProject(projectIdValue),
+                taskNameValue,
+                descriptionValue,
+                dueDateValue !== "" ? dueDateValue : "",
+                priorityValue
+            );
         }
 
         delete this.taskDialog.dataset.editingId;
