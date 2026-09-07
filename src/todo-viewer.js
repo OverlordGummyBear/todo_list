@@ -162,7 +162,11 @@ class TodoViewer{
 
             //Cross out items in itemTextDiv
             inputCheckbox.addEventListener("change", (event) => {
-                item.isCompleted = inputCheckbox.checked;
+                if (confirm(!item.isCompleted ? "Did you complete this task?" : "Remove task from completed?")) {
+                    item.isCompleted = inputCheckbox.checked;
+                } else {
+                    inputCheckbox.checked = item.isCompleted;
+                }
 
                 this.updateScreen();
             })
