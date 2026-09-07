@@ -185,7 +185,7 @@ class TodoViewer{
         this.todoList.activeProject = projectId;
         this.currentProjectH2.textContent = this.todoList.activeProject.name;
 
-        //this.taskDialog.dataset.editingId = this.todoList.activeProject.getId();
+        this.updateScreen();
     }
 
     openProjectDialog(projectId = null){
@@ -240,9 +240,6 @@ class TodoViewer{
             projectSelect.appendChild(projectOption);
         });
 
-        //maybe try to set value of the option to the active project if a new task 
-        // and to the project associated with the task if you are editing it
-
         if(taskId){
             formh2.textContent = "Edit Task";
             const project = this.todoList.getTodoProject(projectId);
@@ -260,11 +257,6 @@ class TodoViewer{
             formh2.textContent = "New Task"
             this.taskForm.reset();
             delete this.taskDialog.dataset.editingId;
-
-            //formh2.textContent = "Edit Project";
-            //const project = this.todoList.getTodoProject(projectId);
-            //this.projectForm.elements.projectName.value = project.name;
-            //this.projectDialog.dataset.editingId = projectId;
         }
 
         this.taskDialog.showModal();
