@@ -328,7 +328,7 @@ class TodoViewer{
                 this.todoList.getTodoProject(projectId.value),
                 taskName.value,
                 description.value,
-                dueDate.value !== "" ? dueDate.value: undefined,
+                dueDate.value !== "" ? dueDate.value: "",
                 priority.value
             )
         }

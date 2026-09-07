@@ -204,6 +204,7 @@ h1{
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding-bottom: 20px;
 }
 
 .current-project{
@@ -272,6 +273,10 @@ hr{
 
 .priority4{
     background-color: #F2F3F4;
+}
+
+.completedTask{
+    background-color: #3b8132;
 }
 
 .item-card p{
