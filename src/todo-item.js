@@ -45,7 +45,7 @@ class TodoItem{
     moveToProject(newProject){
         const oldProject = this._project;
         if(newProject.addTodoItem(this)){
-            oldProject.removeTodoItem(this._id);
+            oldProject.removeTodoItem(this.getId());
             this._project = newProject;
         }
     }

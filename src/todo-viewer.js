@@ -44,13 +44,21 @@ class TodoViewer{
             const editingId = this.taskDialog.dataset.editingId;
 
             if(editingId){
-                console.log("You are editing a task")
-            } else {
-                CreationController.createItem(
-                    this.todoList.activeProject, //getTodoProject(projectId.value),
+                const item = this.todoList.getAllTodoItems().find((item) => item.id === editingId);
+                
+                item.update(
+                    this.todoList.getTodoProject(projectId.value),
                     taskName.value,
                     description.value,
-                    dueDate.value !== "" ? format(new Date(2026, 1, 1), "dd/MM/yyyy") : undefined,
+                    dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
+                    priority.value
+                );
+            } else {
+                CreationController.createItem(
+                    this.todoList.getTodoProject(projectId.value),
+                    taskName.value,
+                    description.value,
+                    dueDate.value !== "" ? format(new Date(dueDate.value), "dd/MM/yyyy") : undefined,
                     priority.value
                 )
             }

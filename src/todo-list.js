@@ -21,6 +21,16 @@ class TodoList{
 
     get todoProjectList(){ return this._todoProjectList; }
 
+    getAllTodoItems(){
+        let allTodoItems = [];
+
+        this.todoProjectList.forEach(project => {
+            allTodoItems = [...allTodoItems, ...project.todoItemList];
+        });
+
+        return allTodoItems;
+    }
+
     getTodoProject(id){
         return this._todoProjectList.find((project) => project.id === id);
     }
